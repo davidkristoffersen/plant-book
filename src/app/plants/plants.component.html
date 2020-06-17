@@ -1,7 +1,11 @@
-<div *ngFor="let plant of plants">
-  <h3>
-    <a routerLink="/profile/{{ plant.id }}">
-      {{ plant.name }}
-    </a>
-  </h3>
+<div class="wrapper">
+  <div *ngFor="let plant of plants">
+    <div class="tooltip">
+      <a class="link" routerLink="/profile/{{ plant.id }}">
+        <h3 class="name">{{ plant.name }}</h3>
+        <img class="img" src="{{ plant.imgUrl }}" />
+        <span class="tooltiptext">{{ plant.imgText }}</span>
+      </a>
+    </div>
+  </div>
 </div>
