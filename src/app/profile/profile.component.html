@@ -1,3 +1,20 @@
-<h3>{{ plant.name }}</h3>
-<h4>Size: {{ plant.size }}</h4>
-<img class="img" src="{{ plant.imgUrl }}" />
+<h2>{{ plant.name }}</h2>
+<div class="row">
+  <div class="column">
+    <h3>Features:</h3>
+    <h4>Size: {{ plant.size }}</h4>
+  </div>
+  <div class="column">
+    <h3>Status</h3>
+    <h4>Humidity: {{ getStatus()['humidity'] }}</h4>
+    <h4>HP: {{ getStatus()['HP'] }}</h4>
+    <h4>Alive: {{ getStatus()['alive'] }}</h4>
+  </div>
+  <div class="column">
+    <img
+      class="img"
+      src="{{ plant.imgUrl }}"
+      alt="{{ plant.imgText }}"
+    />
+  </div>
+</div>

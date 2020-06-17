@@ -11,6 +11,7 @@ import { PlantService } from '../plant.service';
 })
 export class ProfileComponent implements OnInit {
   plant: Plant;
+  status: {};
 
   constructor(
     private route: ActivatedRoute,
@@ -19,6 +20,11 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPlant();
+    this.status = {
+      humidity: 0,
+      alive: true,
+      HP: 100,
+    };
   }
 
   getPlant() {
@@ -26,5 +32,9 @@ export class ProfileComponent implements OnInit {
     this.plantService
       .getPlant(id)
       .subscribe((plant) => (this.plant = plant));
+  }
+
+  getStatus() {
+    return this.status;
   }
 }
