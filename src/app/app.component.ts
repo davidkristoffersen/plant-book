@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'Plant book for dualog';
 
-  constructor(private router: Router) {}
+  constructor(private location: Location) {}
 
-  getLocation() {
-    return this.router.url;
+  goBack() {
+    this.location.back();
   }
 }

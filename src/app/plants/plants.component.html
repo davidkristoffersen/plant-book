@@ -1,7 +1,7 @@
 <div *ngFor="let plant of plants">
   <h3>
-    <span>~{{ plant.name }}~</span>
-    <span> Id: {{ plant.id }}</span>
-    <span> Size: {{ plant.size }}</span>
+    <a routerLink="/profile/{{ plant.id }}">
+      {{ plant.name }}
+    </a>
   </h3>
 </div>

@@ -1,9 +1,6 @@
 <h2>{{ title }}</h2>
 <nav>
+  <button class="tabbar" (click)="goBack()">Back</button>
   <a class="tabbar" routerLink="/home">home</a>
-  <a class="tabbar" routerLink="/profile">Profile</a>
 </nav>
-<div *ngIf="getLocation() === '/home'">
-  <app-plants></app-plants>
-</div>
 <router-outlet></router-outlet>
