@@ -1,4 +1,50 @@
-#tabbar {
-  display: inline-block;
-  padding: 2em;
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #2e2e2e;
+}
+
+.navbar li {
+  float: left;
+  border-right: 2px solid #b9b9b9;
+}
+
+.navbar li:last-child {
+  border: none;
+}
+
+.navbar a {
+  display: block;
+  text-align: center;
+  padding: 1em 2em;
+  color: rgb(255, 146, 57);
+  text-decoration: none;
+  font-size: x-large;
+}
+
+.navbar a:hover {
+  background-color: #505050;
+  cursor: pointer;
+}
+
+.navbar a:active {
+  background-color: #333333;
+}
+
+.navbar .title:hover {
+  background-color: #5ec262a4;
+}
+
+.navbar .title:active {
+  background-color: #3f8d41a4;
+}
+
+.navbar .title {
+  background-color: #08940fa4;
+  font-weight: bold;
+}
+
+.navbar .back {
 }

@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Plant book for dualog';
+  title = 'Plant Book';
 
   constructor(private location: Location) {}
 

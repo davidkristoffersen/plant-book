@@ -1,6 +1,9 @@
-<h2>{{ title }}</h2>
-<nav>
-  <button class="tabbar" (click)="goBack()">Back</button>
-  <a class="tabbar" routerLink="/home">home</a>
-</nav>
+<ul class="navbar">
+  <li>
+    <a class="title" routerLink="/home">{{ title }}</a>
+  </li>
+  <li>
+    <a class="back" (click)="goBack()">Back</a>
+  </li>
+</ul>
 <router-outlet></router-outlet>
