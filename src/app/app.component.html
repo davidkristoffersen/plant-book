@@ -1,2 +1,9 @@
 <h2>{{ title }}</h2>
-<app-plants></app-plants>
+<nav>
+  <a class="tabbar" routerLink="/home">home</a>
+  <a class="tabbar" routerLink="/profile">Profile</a>
+</nav>
+<div *ngIf="getLocation() === '/home'">
+  <app-plants></app-plants>
+</div>
+<router-outlet></router-outlet>
