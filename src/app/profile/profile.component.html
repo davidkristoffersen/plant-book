@@ -1,14 +1,40 @@
 <h2>{{ plant.name }}</h2>
 <div class="row">
   <div class="column">
-    <h3>Features:</h3>
+    <h3>Plant:</h3>
+    <h4>Owner: {{ plant.owner }}</h4>
+    <h4>Group: {{ plant.group }}</h4>
+    <h4>Species: {{ plant.species }}</h4>
     <h4>Size: {{ plant.size }}</h4>
   </div>
   <div class="column">
     <h3>Status</h3>
-    <h4>Humidity: {{ getStatus()['humidity'] }}</h4>
-    <h4>HP: {{ getStatus()['HP'] }}</h4>
-    <h4>Alive: {{ getStatus()['alive'] }}</h4>
+    <h4>Alive: {{ plantState.alive }}</h4>
+    <h4>
+      HP: {{ plantState.HP }}
+      <span class="unit"> %</span>
+    </h4>
+    <h4>
+      Humidity: {{ plantState.humidity }}
+      <span class="unit"> RH</span>
+    </h4>
+    <h4>
+      Sunlight: {{ plantState.sunlight }}
+      <span class="unit"> </span>
+    </h4>
+    <h4>
+      Mood: {{ plantState.mood }}
+      <span class="unit"> </span>
+    </h4>
+    <div>
+      <label
+        >Edit:
+        <input
+          [(ngModel)]="plantState.HP"
+          placeholder="HP"
+        />
+      </label>
+    </div>
   </div>
   <div class="column">
     <img

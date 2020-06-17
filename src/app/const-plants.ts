@@ -1,5 +1,5 @@
 import { Plant } from './plant';
-import { NONE_TYPE } from '@angular/compiler';
+import { PlantState } from './plant-state';
 
 export const PLANTS: Plant[] = [
   {
@@ -53,3 +53,19 @@ export const PLANTS: Plant[] = [
     imgText: 'Fat boi',
   },
 ];
+
+let plantstates: PlantState[] = [];
+for (let plant of PLANTS) {
+  let state = {
+    id: plant.id,
+    isAlive: true,
+    alive: 'Yes',
+    HP: 1,
+    humidity: 0,
+    sunlightMin: 150,
+    sunlight: 150,
+    mood: ':(',
+  };
+  plantstates.push(state);
+}
+export const PLANTSTATES: PlantState[] = plantstates;

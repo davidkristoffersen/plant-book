@@ -18,3 +18,11 @@ img {
   width: 400px;
   height: 800px;
 }
+
+h3 {
+  text-decoration: underline;
+}
+
+.unit {
+  font-style: italic;
+}

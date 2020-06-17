@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 import { Plant } from './plant';
-import { PLANTS } from './const-plants';
+import { PlantState } from './plant-state';
+import { PLANTS, PLANTSTATES } from './const-plants';
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +17,11 @@ export class PlantService {
 
   getPlant(id: number) {
     return of(PLANTS.find((plant) => plant.id === id));
+  }
+
+  getPlantState(id: number) {
+    return of(
+      PLANTSTATES.find((plantState) => plantState.id === id)
+    );
   }
 }
