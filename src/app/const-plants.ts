@@ -1,6 +1,5 @@
 import { Plant } from './plant';
-import { PlantState } from './plant-state';
-
+/*
 export const PLANTS: Plant[] = [
   {
     id: 1,
@@ -65,7 +64,15 @@ for (let plant of PLANTS) {
     sunlightMin: 150,
     sunlight: 150,
     mood: ':(',
+    name: '',
+    owner: '',
+    group: '',
+    species: '',
+    size: 0,
+    imgUrl: '',
+    imgText: '',
   };
   plantstates.push(state);
 }
 export const PLANTSTATES: PlantState[] = plantstates;
+*/

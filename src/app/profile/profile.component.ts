@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 
 import { Plant } from '../plant';
-import { PlantState } from '../plant-state';
 import { PlantService } from '../plant.service';
 
 @Component({
@@ -13,7 +12,6 @@ import { PlantService } from '../plant.service';
 })
 export class ProfileComponent implements OnInit {
   plant: Plant;
-  plantState: PlantState;
   statusForm;
 
   constructor(
@@ -28,7 +26,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPlant();
-    this.getState();
   }
 
   getId() {
@@ -41,25 +38,15 @@ export class ProfileComponent implements OnInit {
       .subscribe((plant) => (this.plant = plant));
   }
 
-  getState() {
-    this.plantService
-      .getPlantState(this.getId())
-      .subscribe(
-        (plantState) => (this.plantState = plantState)
-      );
-  }
-
   getSunlight() {
-    return this.formatTime(this.plantState['sunlight']);
+    return this.formatTime(this.plant.sunlight);
   }
 
   formatTime(time) {
     let ret = '';
     let days = Math.floor(time / (60 * 24));
     let hours = Math.floor(time / 60 - days * 24);
-    let minutes = Math.floor(
-      time - hours * 60 - days * 24 * 60
-    );
+    let minutes = Math.floor(time - hours * 60 - days * 24 * 60);
     return days + 'd ' + hours + 'h ' + minutes + 'm';
   }
 
@@ -68,32 +55,33 @@ export class ProfileComponent implements OnInit {
   }
 
   addHP(num) {
-    this.plantState['HP'] += num;
-    this.updateHP();
+    this.plant.HP += num;
+    this.updatePlant();
   }
 
-  updateHP() {
-    if (this.plantState['HP'] <= 0) {
-      this.plantState['HP'] = 0;
-      this.plantState['alive'] = 'No';
-      this.plantState['isAlive'] = false;
-      this.plantState['mood'] = 'X_X';
+  updatePlant() {
+    if (this.plant.HP <= 0) {
+      this.plant.HP = 0;
+      this.plant.alive = 'No';
+      this.plant.isAlive = false;
+      this.plant.mood = 'X_X';
     } else {
-      this.plantState['alive'] = 'Yes';
-      this.plantState['isAlive'] = true;
+      this.plant.alive = 'Yes';
+      this.plant.isAlive = true;
 
-      if (this.plantState['HP'] >= 70) {
-        this.plantState['mood'] = ':)';
-      } else if (this.plantState['HP'] >= 40) {
-        this.plantState['mood'] = ':|';
-      } else if (this.plantState['HP'] > 0) {
-        this.plantState['mood'] = ':(';
+      if (this.plant.HP >= 70) {
+        this.plant.mood = ':)';
+      } else if (this.plant.HP >= 40) {
+        this.plant.mood = ':|';
+      } else if (this.plant.HP > 0) {
+        this.plant.mood = ':(';
       }
 
-      if (this.plantState['HP'] >= 100) {
-        this.plantState['HP'] = 100;
-        this.plantState['mood'] = ':D';
+      if (this.plant.HP >= 100) {
+        this.plant.HP = 100;
+        this.plant.mood = ':D';
       }
     }
+    this.plantService.updatePlant(this.plant.id, this.plant);
   }
 }

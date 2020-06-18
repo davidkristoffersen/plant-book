@@ -9,15 +9,15 @@
   </div>
   <div class="column">
     <h3>Status</h3>
-    <h4>Alive: {{ plantState.alive }}</h4>
+    <h4>Alive: {{ plant.alive }}</h4>
     <h4>
-      HP: {{ plantState.HP }}
+      HP: {{ plant.HP }}
       <span class="unit"> % </span>
       <button (click)="addHP(10)">+</button>
       <button (click)="addHP(-10)">-</button>
     </h4>
     <h4>
-      Humidity: {{ plantState.humidity }}
+      Humidity: {{ plant.humidity }}
       <span class="unit"> RH</span>
     </h4>
     <h4>
@@ -25,7 +25,7 @@
       <span class="unit"> </span>
     </h4>
     <h4>
-      Mood: {{ plantState.mood }}
+      Mood: {{ plant.mood }}
       <span class="unit"> </span>
     </h4>
     <div>

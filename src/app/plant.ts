@@ -7,4 +7,10 @@ export interface Plant {
   size: number;
   imgUrl: string;
   imgText: string;
+  isAlive: boolean;
+  alive: string;
+  HP: number;
+  humidity: number;
+  sunlight: number;
+  mood: string;
 }
