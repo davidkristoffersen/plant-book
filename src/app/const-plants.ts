@@ -60,7 +60,7 @@ for (let plant of PLANTS) {
     id: plant.id,
     isAlive: true,
     alive: 'Yes',
-    HP: 1,
+    HP: 10,
     humidity: 0,
     sunlightMin: 150,
     sunlight: 150,

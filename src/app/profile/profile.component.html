@@ -12,14 +12,16 @@
     <h4>Alive: {{ plantState.alive }}</h4>
     <h4>
       HP: {{ plantState.HP }}
-      <span class="unit"> %</span>
+      <span class="unit"> % </span>
+      <button (click)="addHP(10)">+</button>
+      <button (click)="addHP(-10)">-</button>
     </h4>
     <h4>
       Humidity: {{ plantState.humidity }}
       <span class="unit"> RH</span>
     </h4>
     <h4>
-      Sunlight: {{ plantState.sunlight }}
+      Sunlight: {{ getSunlight() }}
       <span class="unit"> </span>
     </h4>
     <h4>
@@ -27,13 +29,25 @@
       <span class="unit"> </span>
     </h4>
     <div>
-      <label
-        >Edit:
-        <input
-          [(ngModel)]="plantState.HP"
-          placeholder="HP"
-        />
-      </label>
+      <!--<form
+        formGroup]="statusForm"
+        (ngSubmit)="onSubmitStatus(10)"
+      >
+        <div>
+          <label for="name"
+            >HP:
+            <input
+              id="name"
+              formControlName="name"
+              type="number"
+              min="0"
+              max="100"
+              placeholder="HP"
+            />
+          </label>
+        </div>
+        <button type="submit">Edit</button>
+      </form>-->
     </div>
   </div>
   <div class="column">

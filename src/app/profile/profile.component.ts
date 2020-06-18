@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 import { Plant } from '../plant';
 import { PlantState } from '../plant-state';
@@ -13,18 +14,21 @@ import { PlantService } from '../plant.service';
 export class ProfileComponent implements OnInit {
   plant: Plant;
   plantState: PlantState;
-  status: {};
-  test: string;
+  statusForm;
 
   constructor(
     private route: ActivatedRoute,
-    private plantService: PlantService
-  ) {}
+    private plantService: PlantService,
+    private formBuilder: FormBuilder
+  ) {
+    this.statusForm = this.formBuilder.group({
+      HP: 0,
+    });
+  }
 
   ngOnInit(): void {
     this.getPlant();
     this.getState();
-    this.test = 'testing';
   }
 
   getId() {
@@ -45,6 +49,10 @@ export class ProfileComponent implements OnInit {
       );
   }
 
+  getSunlight() {
+    return this.formatTime(this.plantState['sunlight']);
+  }
+
   formatTime(time) {
     let ret = '';
     let days = Math.floor(time / (60 * 24));
@@ -53,5 +61,39 @@ export class ProfileComponent implements OnInit {
       time - hours * 60 - days * 24 * 60
     );
     return days + 'd ' + hours + 'h ' + minutes + 'm';
+  }
+
+  onSubmitStatus(statusData) {
+    console.log('Submitted');
+  }
+
+  addHP(num) {
+    this.plantState['HP'] += num;
+    this.updateHP();
+  }
+
+  updateHP() {
+    if (this.plantState['HP'] <= 0) {
+      this.plantState['HP'] = 0;
+      this.plantState['alive'] = 'No';
+      this.plantState['isAlive'] = false;
+      this.plantState['mood'] = 'X_X';
+    } else {
+      this.plantState['alive'] = 'Yes';
+      this.plantState['isAlive'] = true;
+
+      if (this.plantState['HP'] >= 70) {
+        this.plantState['mood'] = ':)';
+      } else if (this.plantState['HP'] >= 40) {
+        this.plantState['mood'] = ':|';
+      } else if (this.plantState['HP'] > 0) {
+        this.plantState['mood'] = ':(';
+      }
+
+      if (this.plantState['HP'] >= 100) {
+        this.plantState['HP'] = 100;
+        this.plantState['mood'] = ':D';
+      }
+    }
   }
 }
