@@ -1,36 +1,85 @@
-<h2>{{ plant.name }}</h2>
+<br />
 <div class="row">
   <div class="column">
-    <h3>Plant:</h3>
-    <h4>Owner: {{ plant.owner }}</h4>
-    <h4>Family: {{ plant.family }}</h4>
-    <h4>Species: {{ plant.species }}</h4>
-    <h4>Size: {{ plant.size }}</h4>
-    <h4>Id: {{ plant.size }}</h4>
+    <table id="status">
+      <tr>
+        <th>Plant</th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>Owner</td>
+        <td>{{ plant.owner }}</td>
+      </tr>
+      <tr>
+        <td>Family</td>
+        <td>{{ plant.family }}</td>
+      </tr>
+      <tr>
+        <td>Species</td>
+        <td>{{ plant.species }}</td>
+      </tr>
+      <tr>
+        <td>Size</td>
+        <td>{{ plant.size }}</td>
+      </tr>
+      <tr>
+        <td>Id</td>
+        <td>{{ plant.size }}</td>
+      </tr>
+    </table>
   </div>
   <div class="column">
-    <h3>Status</h3>
-    <h4>Alive: {{ plant.alive }}</h4>
-    <h4>
-      HP: {{ plant.HP }}
-      <span class="unit"> % </span>
-      <button (click)="addHP(10)">+</button>
-      <button (click)="addHP(-10)">-</button>
-    </h4>
-    <h4>
-      Humidity: {{ plant.humidity }}
-      <span class="unit"> RH</span>
-    </h4>
-    <h4>
-      Sunlight: {{ getSunlight() }}
-      <span class="unit"> </span>
-    </h4>
-    <h4>
-      Mood: {{ plant.mood }}
-      <span class="unit"> </span>
-    </h4>
-    <div>
-      <!--<form
+    <table id="status">
+      <tr>
+        <th>Status</th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>Alive</td>
+        <td>{{ plant.alive }}</td>
+      </tr>
+      <tr>
+        <td>HP</td>
+        <td>
+          {{ plant.HP }}
+          <span class="unit"> % </span>
+          <button (click)="addHP(10)">+</button>
+          <button (click)="addHP(-10)">-</button>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Humidity</td>
+        <td>
+          {{ plant.humidity }}
+          <span class="unit"> RH</span>
+        </td>
+      </tr>
+      <td>Sunlight</td>
+      <td>
+        {{ getSunlight() }}
+        <span class="unit"> </span>
+      </td>
+      <tr>
+        <td>Mood</td>
+        <td>
+          {{ plant.mood }}
+          <span class="unit"> </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="column">
+    <img
+      class="img"
+      src="{{ plant.imgUrl }}"
+      alt="{{ plant.imgText }}"
+    />
+  </div>
+</div>
+
+<!--<div>
+      <form
         formGroup]="statusForm"
         (ngSubmit)="onSubmitStatus(10)"
       >
@@ -48,14 +97,5 @@
           </label>
         </div>
         <button type="submit">Edit</button>
-      </form>-->
-    </div>
-  </div>
-  <div class="column">
-    <img
-      class="img"
-      src="{{ plant.imgUrl }}"
-      alt="{{ plant.imgText }}"
-    />
-  </div>
-</div>
+      </form>
+    </div>-->
