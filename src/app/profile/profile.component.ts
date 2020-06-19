@@ -50,8 +50,16 @@ export class ProfileComponent implements OnInit {
     return days + 'd ' + hours + 'h ' + minutes + 'm';
   }
 
-  onSubmitStatus(statusData) {
-    console.log('Submitted');
+  onSubmitStatus() {
+    if (this.statusForm.valid) {
+      console.log(['Form Submitted!', this.statusForm]);
+      this.updatePlantValues(this.statusForm.value);
+    }
+  }
+
+  updatePlantValues(values) {
+    this.plant.HP = values.HP;
+    this.plantService.updatePlant(this.plant.id, this.plant);
   }
 
   addHP(num) {

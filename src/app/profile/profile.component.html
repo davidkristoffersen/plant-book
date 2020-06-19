@@ -55,11 +55,13 @@
           <span class="unit"> RH</span>
         </td>
       </tr>
-      <td>Sunlight</td>
-      <td>
-        {{ getSunlight() }}
-        <span class="unit"> </span>
-      </td>
+      <tr>
+        <td>Sunlight</td>
+        <td>
+          {{ getSunlight() }}
+          <span class="unit"> </span>
+        </td>
+      </tr>
       <tr>
         <td>Mood</td>
         <td>
@@ -68,6 +70,28 @@
         </td>
       </tr>
     </table>
+    <br />
+    <div>
+      <form
+        [formGroup]="statusForm"
+        (ngSubmit)="onSubmitStatus()"
+      >
+        <div>
+          <label for="statusForm"
+            >HP:
+            <input
+              id="HP"
+              formControlName="HP"
+              type="number"
+              min="0"
+              max="100"
+              placeholder="HP"
+            />
+          </label>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   </div>
   <div class="column">
     <img
@@ -77,25 +101,3 @@
     />
   </div>
 </div>
-
-<!--<div>
-      <form
-        formGroup]="statusForm"
-        (ngSubmit)="onSubmitStatus(10)"
-      >
-        <div>
-          <label for="name"
-            >HP:
-            <input
-              id="name"
-              formControlName="name"
-              type="number"
-              min="0"
-              max="100"
-              placeholder="HP"
-            />
-          </label>
-        </div>
-        <button type="submit">Edit</button>
-      </form>
-    </div>-->
