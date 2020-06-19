@@ -1,6 +1,23 @@
 import { Plant } from './plant';
-/*
-export const PLANTS: Plant[] = [
+
+export const DEFAULT_PLANT: Plant = {
+  id: 1,
+  isAlive: true,
+  alive: 'Yes',
+  HP: 10,
+  humidity: 0,
+  sunlight: 0,
+  mood: ':(',
+  name: 'Unknown',
+  size: 1,
+  owner: 'Unknown',
+  species: 'Unknown',
+  group: 'Unknown',
+  imgUrl: '../assets/images/potnus.jpg',
+  imgText: 'Alt text',
+};
+
+export const MOCK_PLANTS: Plant[] = [
   {
     id: 1,
     name: 'Potnus',
@@ -10,6 +27,12 @@ export const PLANTS: Plant[] = [
     group: 'Gymnosperms',
     imgUrl: '../assets/images/potnus.jpg',
     imgText: 'Small boi',
+    isAlive: true,
+    alive: 'Yes',
+    HP: 10,
+    humidity: 0,
+    sunlight: 0,
+    mood: ':(',
   },
   {
     id: 2,
@@ -20,6 +43,12 @@ export const PLANTS: Plant[] = [
     group: 'Pteridophytes',
     imgUrl: '../assets/images/lykketrollet.jpg',
     imgText: 'Thicc boi',
+    isAlive: true,
+    alive: 'Yes',
+    HP: 10,
+    humidity: 0,
+    sunlight: 0,
+    mood: ':(',
   },
   {
     id: 3,
@@ -30,6 +59,12 @@ export const PLANTS: Plant[] = [
     group: 'Gymnosperms',
     imgUrl: '../assets/images/baby_alfred.jpg',
     imgText: 'Baby boi',
+    isAlive: true,
+    alive: 'Yes',
+    HP: 10,
+    humidity: 0,
+    sunlight: 0,
+    mood: ':(',
   },
   {
     id: 4,
@@ -40,6 +75,12 @@ export const PLANTS: Plant[] = [
     group: 'Gymnosperms',
     imgUrl: '../assets/images/pilten.jpg',
     imgText: 'Sad boi :(',
+    isAlive: true,
+    alive: 'Yes',
+    HP: 10,
+    humidity: 0,
+    sunlight: 0,
+    mood: ':(',
   },
   {
     id: 5,
@@ -50,29 +91,11 @@ export const PLANTS: Plant[] = [
     group: 'Pteridophytes',
     imgUrl: '../assets/images/plutti.jpg',
     imgText: 'Fat boi',
-  },
-];
-
-let plantstates: PlantState[] = [];
-for (let plant of PLANTS) {
-  let state = {
-    id: plant.id,
     isAlive: true,
     alive: 'Yes',
     HP: 10,
     humidity: 0,
-    sunlightMin: 150,
-    sunlight: 150,
+    sunlight: 0,
     mood: ':(',
-    name: '',
-    owner: '',
-    group: '',
-    species: '',
-    size: 0,
-    imgUrl: '',
-    imgText: '',
-  };
-  plantstates.push(state);
-}
-export const PLANTSTATES: PlantState[] = plantstates;
-*/
+  },
+];

@@ -2,29 +2,15 @@ import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 import { Plant } from './plant';
+import { DEFAULT_PLANT, MOCK_PLANTS } from './const-plants';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlantService {
-  PLANT_STATES = 'plantStates';
-  plantState: Plant = {
-    id: 1,
-    isAlive: true,
-    alive: 'Yes',
-    HP: 10,
-    humidity: 0,
-    sunlight: 0,
-    mood: ':(',
-    name: 'Unknown',
-    size: 1,
-    owner: 'Unknown',
-    species: 'Unknown',
-    group: 'Unknown',
-    imgUrl: '../assets/images/potnus.jpg',
-    imgText: 'Alt text',
-  };
+  PLANTS_KEY = 'plantStates';
+  META_KEY = 'metaData';
 
   constructor(
     private localStorageService: LocalStorageService
@@ -32,10 +18,10 @@ export class PlantService {
 
   initPlantList() {
     const state = this.localStorageService.getRoot(
-      this.PLANT_STATES
+      this.PLANTS_KEY
     );
     if (state === undefined || Object.keys(state).length === 0) {
-      this.localStorageService.init(this.PLANT_STATES, {});
+      this.localStorageService.init(this.PLANTS_KEY, {});
       console.warn(['PlantList', {}]);
       return false;
     }
@@ -43,14 +29,23 @@ export class PlantService {
     return true;
   }
 
+  setMockBool(bool: boolean) {
+    this.localStorageService.setRoot(this.META_KEY, {});
+    this.localStorageService.set(this.META_KEY, 'mock', bool);
+  }
+
+  getMockBool() {
+    return this.localStorageService.get(this.META_KEY, 'mock');
+  }
+
   initPlant() {
-    const state = { ...this.plantState };
+    const state = { ...DEFAULT_PLANT };
     const id = this.genId();
     state.id = id;
 
     console.log(['Init plant:', state]);
     this.localStorageService.set(
-      this.PLANT_STATES,
+      this.PLANTS_KEY,
       id.toString(),
       state
     );
@@ -58,7 +53,7 @@ export class PlantService {
 
   updatePlant(id: number, plant: Plant) {
     this.localStorageService.set(
-      this.PLANT_STATES,
+      this.PLANTS_KEY,
       id.toString(),
       plant
     );
@@ -67,7 +62,7 @@ export class PlantService {
 
   genId() {
     const plants = this.localStorageService.getRoot(
-      this.PLANT_STATES
+      this.PLANTS_KEY
     );
     if (
       plants === undefined ||
@@ -81,15 +76,13 @@ export class PlantService {
   }
 
   getPlants() {
-    return of(
-      this.localStorageService.getRoot(this.PLANT_STATES)
-    );
+    return of(this.localStorageService.getRoot(this.PLANTS_KEY));
   }
 
   getPlant(id: number) {
     return of(
       this.localStorageService.get(
-        this.PLANT_STATES,
+        this.PLANTS_KEY,
         id.toString()
       )
     );
@@ -97,12 +90,12 @@ export class PlantService {
 
   setPlant(id: number, key: string, value: any) {
     const state = this.localStorageService.get(
-      this.PLANT_STATES,
+      this.PLANTS_KEY,
       id.toString()
     );
     state[key] = value;
     this.localStorageService.set(
-      this.PLANT_STATES,
+      this.PLANTS_KEY,
       id.toString(),
       state
     );
@@ -110,30 +103,13 @@ export class PlantService {
 
   deletePlant(id: number) {
     this.localStorageService.delete(
-      this.PLANT_STATES,
+      this.PLANTS_KEY,
       id.toString()
     );
   }
 
   deleteAllPlants() {
-    this.localStorageService.deleteRoot(this.PLANT_STATES);
+    this.localStorageService.deleteRoot(this.PLANTS_KEY);
     this.initPlantList();
   }
-
-  // OLD
-  /*
-  getPlantsT() {
-    return of(PLANTS);
-  }
-
-  getPlantT(id: number) {
-    return of(PLANTS.find((plant) => plant.id === id));
-  }
-
-  getPlantState(id: number) {
-    return of(
-      PLANTSTATES.find((plantState) => plantState.id === id)
-    );
-  }
-  */
 }

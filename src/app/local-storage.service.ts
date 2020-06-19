@@ -42,7 +42,7 @@ export class LocalStorageService {
       return obj[key];
     }
     console.warn(`Get: ${rootKey}.${key}: Does not exist`);
-    return '';
+    return undefined;
   }
 
   deleteRoot(key: string) {

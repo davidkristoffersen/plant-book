@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Plant } from '../plant';
+import { MOCK_PLANTS } from '../const-plants';
 import { PlantService } from '../plant.service';
 
 @Component({
@@ -16,6 +17,9 @@ export class PlantsComponent implements OnInit {
   ngOnInit(): void {
     if (!this.plantService.initPlantList()) {
       console.warn('Plants does not exists');
+      if (this.plantService.getMockBool() === true) {
+        this.setMockPlants(true);
+      }
     } else {
       console.warn('Plants already exists');
     }
@@ -41,6 +45,18 @@ export class PlantsComponent implements OnInit {
 
   deletePlant(id: number) {
     this.plantService.deletePlant(id);
+    this.getPlants();
+  }
+
+  setMockPlants(bool: boolean) {
+    this.plantService.deleteAllPlants();
+    this.plantService.setMockBool(bool);
+    if (bool) {
+      for (const plant of MOCK_PLANTS) {
+        this.plantService.initPlant();
+        this.plantService.updatePlant(plant.id, plant);
+      }
+    }
     this.getPlants();
   }
 

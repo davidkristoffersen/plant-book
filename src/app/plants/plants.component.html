@@ -1,4 +1,6 @@
 <button (click)="onClear()">Clear</button>
+<button (click)="setMockPlants(true)">Use mock</button>
+<button (click)="setMockPlants(false)">Delete mock</button>
 <button (click)="addPlant()">Add Plant</button>
 <div class="wrapper">
   <div *ngFor="let plant of plants">
