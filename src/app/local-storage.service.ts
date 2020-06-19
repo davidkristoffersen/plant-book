@@ -54,13 +54,13 @@ export class LocalStorageService {
       console.warn(`Delete: ${rootKey}: Does not exist`);
     }
     const currentState = this.storage.get(rootKey);
-    delete currentState.key;
+    delete currentState[key];
     this.storage.set(rootKey, currentState);
     console.log(`Delete: ${rootKey}.${key}: deleted`);
   }
 
   clear() {
-    console.warn('');
+    console.warn('Clearing local storage');
     this.storage.clear();
   }
 }

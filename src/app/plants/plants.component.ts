@@ -16,12 +16,6 @@ export class PlantsComponent implements OnInit {
   ngOnInit(): void {
     if (!this.plantService.initPlantList()) {
       console.warn('Plants does not exists');
-      this.plantService.initPlant(1);
-      this.plantService.initPlant(2);
-      this.plantService.initPlant(3);
-      this.plantService.setPlant(1, 'mood', ':S');
-      this.plantService.setPlant(2, 'mood', 'XD');
-      this.plantService.setPlant(3, 'mood', ':/');
     } else {
       console.warn('Plants already exists');
     }
@@ -30,8 +24,28 @@ export class PlantsComponent implements OnInit {
 
   getPlants() {
     this.plantService.getPlants().subscribe((plants) => {
-      (this.plants = plants),
-        console.log(['Got plants', plants]);
+      (this.plants = Object.keys(plants).map(
+        (id) => plants[+id]
+      )),
+        console.log([
+          'Got plants',
+          Object.keys(plants).map((id) => plants[+id]),
+        ]);
     });
+  }
+
+  addPlant() {
+    this.plantService.initPlant();
+    this.getPlants();
+  }
+
+  deletePlant(id: number) {
+    this.plantService.deletePlant(id);
+    this.getPlants();
+  }
+
+  onClear() {
+    this.plantService.deleteAllPlants();
+    this.getPlants();
   }
 }

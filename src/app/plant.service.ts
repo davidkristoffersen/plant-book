@@ -43,8 +43,9 @@ export class PlantService {
     return true;
   }
 
-  initPlant(id: number) {
+  initPlant() {
     const state = { ...this.plantState };
+    const id = this.genId();
     state.id = id;
 
     console.log(['Init plant:', state]);
@@ -62,6 +63,21 @@ export class PlantService {
       plant
     );
     console.log(['Updated plant', plant]);
+  }
+
+  genId() {
+    const plants = this.localStorageService.getRoot(
+      this.PLANT_STATES
+    );
+    if (
+      plants === undefined ||
+      Object.keys(plants).length === 0
+    ) {
+      return 0;
+    }
+
+    const ids = Object.keys(plants).map((id) => +id);
+    return Math.max(...ids) + 1;
   }
 
   getPlants() {

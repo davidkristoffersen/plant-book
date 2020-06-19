@@ -1,17 +1,18 @@
+<button (click)="onClear()">Clear</button>
+<button (click)="addPlant()">Add Plant</button>
 <div class="wrapper">
-  <div *ngFor="let plant of plants | keyvalue">
+  <div *ngFor="let plant of plants">
     <div class="tooltip">
-      <a class="link" routerLink="/profile/{{ plant.value.id }}">
-        <h3 class="name">{{ plant.value.name }}</h3>
+      <a class="link" routerLink="/profile/{{ plant.id }}">
+        <h3 class="name">{{ plant.name }}: {{ plant.id }}</h3>
         <img
           class="img"
-          src="{{ plant.value.imgUrl }}"
-          alt="{{ plant.value.imgText }}"
+          src="{{ plant.imgUrl }}"
+          alt="{{ plant.imgText }}"
         />
-        <span class="tooltiptext">{{
-          plant.value.imgText
-        }}</span>
+        <span class="tooltiptext">{{ plant.imgText }}</span>
       </a>
     </div>
+    <button (click)="deletePlant(plant.id)">Delete</button>
   </div>
 </div>
