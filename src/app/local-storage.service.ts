@@ -17,17 +17,19 @@ export class LocalStorageService {
   }
 
   setRoot(key: string, value: any) {
+    console.log(['Setting root', key, value]);
     this.init(key, value);
   }
 
   set(rootKey: string, key: string, value: any) {
     if (!this.storage.has(rootKey)) {
-      this.log(`Set: ${rootKey}: Does not exist`);
+      console.warn(`Set: ${rootKey}: Does not exist`);
+      return;
     }
     const currentState = this.storage.get(rootKey);
     currentState[key] = value;
     this.storage.set(rootKey, currentState);
-    this.log(`Set: ${rootKey}.${key} = ${value}`);
+    console.log([`Set: ${rootKey}.${key}`, value]);
   }
 
   getRoot(key: string) {
@@ -39,7 +41,7 @@ export class LocalStorageService {
     if (obj && key in obj) {
       return obj[key];
     }
-    this.log(`Get: ${rootKey}.${key}: Does not exist`);
+    console.warn(`Get: ${rootKey}.${key}: Does not exist`);
     return '';
   }
 
@@ -49,19 +51,16 @@ export class LocalStorageService {
 
   delete(rootKey: string, key: string) {
     if (!this.storage.has(rootKey)) {
-      this.log(`Delete: ${rootKey}: Does not exist`);
+      console.warn(`Delete: ${rootKey}: Does not exist`);
     }
     const currentState = this.storage.get(rootKey);
     delete currentState.key;
     this.storage.set(rootKey, currentState);
-    this.log(`Delete: ${rootKey}.${key}: deleted`);
+    console.log(`Delete: ${rootKey}.${key}: deleted`);
   }
 
   clear() {
+    console.warn('');
     this.storage.clear();
-  }
-
-  log(msg: string) {
-    this.log('localStorageService: ' + msg);
   }
 }

@@ -35,9 +35,11 @@ export class PlantService {
       this.PLANT_STATES
     );
     if (state === undefined || Object.keys(state).length === 0) {
+      this.localStorageService.init(this.PLANT_STATES, {});
+      console.warn(['PlantList', {}]);
       return false;
     }
-    this.localStorageService.init(this.PLANT_STATES, {});
+    console.warn(['PlantList', state]);
     return true;
   }
 
@@ -45,12 +47,12 @@ export class PlantService {
     const state = { ...this.plantState };
     state.id = id;
 
+    console.log(['Init plant:', state]);
     this.localStorageService.set(
       this.PLANT_STATES,
       id.toString(),
       state
     );
-    this.log(`Init plant: ${state}`);
   }
 
   updatePlant(id: number, plant: Plant) {
@@ -59,7 +61,7 @@ export class PlantService {
       id.toString(),
       plant
     );
-    this.log(`Updated plant ${plant}`);
+    console.log(['Updated plant', plant]);
   }
 
   getPlants() {
@@ -100,10 +102,6 @@ export class PlantService {
   deleteAllPlants() {
     this.localStorageService.deleteRoot(this.PLANT_STATES);
     this.initPlantList();
-  }
-
-  log(msg: string) {
-    console.log('plantService: ' + msg);
   }
 
   // OLD
