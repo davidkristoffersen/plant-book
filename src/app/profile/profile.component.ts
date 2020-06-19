@@ -21,6 +21,8 @@ export class ProfileComponent implements OnInit {
   ) {
     this.statusForm = this.formBuilder.group({
       HP: 0,
+      humidity: 0,
+      sunlight: 0,
     });
   }
 
@@ -59,6 +61,8 @@ export class ProfileComponent implements OnInit {
 
   updatePlantValues(values) {
     this.plant.HP = values.HP;
+    this.plant.humidity = values.humidity;
+    this.plant.sunlight = values.sunlight;
     this.plantService.updatePlant(this.plant.id, this.plant);
   }
 
