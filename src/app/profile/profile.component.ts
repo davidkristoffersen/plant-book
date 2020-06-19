@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
+import { of } from 'rxjs';
 
 import { Plant } from '../plant';
 import { PlantService } from '../plant.service';
@@ -13,21 +14,20 @@ import { PlantService } from '../plant.service';
 export class ProfileComponent implements OnInit {
   plant: Plant;
   statusForm;
+  edit: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private plantService: PlantService,
     private formBuilder: FormBuilder
-  ) {
-    this.statusForm = this.formBuilder.group({
-      HP: 0,
-      humidity: 0,
-      sunlight: 0,
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.getPlant();
+    this.edit = false;
+    this.getPlant().subscribe(
+      (_) =>
+        (this.statusForm = this.formBuilder.group(this.plant))
+    );
   }
 
   getId() {
@@ -35,9 +35,11 @@ export class ProfileComponent implements OnInit {
   }
 
   getPlant() {
-    this.plantService
-      .getPlant(this.getId())
-      .subscribe((plant) => (this.plant = plant));
+    return of(
+      this.plantService
+        .getPlant(this.getId())
+        .subscribe((plant) => (this.plant = plant))
+    );
   }
 
   getSunlight() {
@@ -57,18 +59,16 @@ export class ProfileComponent implements OnInit {
       console.log(['Form Submitted!', this.statusForm]);
       this.updatePlantValues(this.statusForm.value);
     }
+    this.edit = false;
   }
 
   updatePlantValues(values) {
-    this.plant.HP = values.HP;
-    this.plant.humidity = values.humidity;
-    this.plant.sunlight = values.sunlight;
-    this.plantService.updatePlant(this.plant.id, this.plant);
+    this.plant = values;
+    this.updatePlant();
   }
 
-  addHP(num) {
-    this.plant.HP += num;
-    this.updatePlant();
+  onEdit() {
+    this.edit = true;
   }
 
   updatePlant() {

@@ -29,94 +29,120 @@
     </table>
   </div>
   <div class="column">
-    <table id="status">
-      <tr>
-        <th>Status</th>
-        <th></th>
-      </tr>
-      <tr>
-        <td>Alive</td>
-        <td>{{ plant.alive }}</td>
-      </tr>
-      <tr>
-        <td>HP</td>
-        <td>
-          {{ plant.HP }}
-          <span class="unit"> % </span>
-          <button (click)="addHP(10)">+</button>
-          <button (click)="addHP(-10)">-</button>
-        </td>
-      </tr>
-
-      <tr>
-        <td>Humidity</td>
-        <td>
-          {{ plant.humidity }}
-          <span class="unit"> RH</span>
-        </td>
-      </tr>
-      <tr>
-        <td>Sunlight</td>
-        <td>
-          {{ getSunlight() }}
-          <span class="unit"> </span>
-        </td>
-      </tr>
-      <tr>
-        <td>Mood</td>
-        <td>
-          {{ plant.mood }}
-          <span class="unit"> </span>
-        </td>
-      </tr>
-    </table>
-    <br />
-    <div>
-      <form
-        [formGroup]="statusForm"
-        (ngSubmit)="onSubmitStatus()"
-      >
-        <div>
-          <label for="statusForm"
-            >HP:
-            <input
-              id="HP"
-              formControlName="HP"
-              type="number"
-              min="0"
-              max="100"
-              placeholder="HP"
-            />
-          </label>
-        </div>
-        <div>
-          <label for="statusForm"
-            >Humidity:
-            <input
-              id="humidity"
-              formControlName="humidity"
-              type="number"
-              min="0"
-              max="100"
-              placeholder="humidity"
-            />
-          </label>
-        </div>
-        <div>
-          <label for="statusForm"
-            >Sunlight:
-            <input
-              id="sunlight"
-              formControlName="sunlight"
-              type="number"
-              min="0"
-              max="100"
-              placeholder="sunlight"
-            />
-          </label>
-        </div>
+    <form [formGroup]="statusForm" (ngSubmit)="onSubmitStatus()">
+      <table id="status">
+        <tr>
+          <th>Status</th>
+          <th></th>
+        </tr>
+        <tr>
+          <td>Alive</td>
+          <td>
+            <div
+              *ngIf="
+                edit === true;
+                then thenEditAlive;
+                else elseEditAlive
+              "
+            ></div>
+            <ng-template #thenEditAlive>
+              <label for="statusForm">
+                <input
+                  formControlName="isAlive"
+                  type="checkbox"
+                />
+              </label>
+            </ng-template>
+            <ng-template #elseEditAlive>
+              {{ plant.alive }}
+            </ng-template>
+          </td>
+        </tr>
+        <tr>
+          <td>HP</td>
+          <td>
+            <div
+              *ngIf="
+                edit === true;
+                then thenEditHP;
+                else elseEditHP
+              "
+            ></div>
+            <ng-template #thenEditHP>
+              <label for="statusForm">
+                <input formControlName="HP" type="number" />
+              </label>
+            </ng-template>
+            <ng-template #elseEditHP>
+              {{ plant.HP }}
+              <span class="unit"> % </span>
+            </ng-template>
+          </td>
+        </tr>
+        <tr>
+          <td>Humidity</td>
+          <td>
+            <div
+              *ngIf="
+                edit === true;
+                then thenEditHumidity;
+                else elseEditHumidity
+              "
+            ></div>
+            <ng-template #thenEditHumidity>
+              <label for="statusForm">
+                <input
+                  formControlName="humidity"
+                  type="number"
+                />
+              </label>
+            </ng-template>
+            <ng-template #elseEditHumidity>
+              {{ plant.humidity }}
+              <span class="unit"> RH</span>
+            </ng-template>
+          </td>
+        </tr>
+        <tr>
+          <td>Sunlight</td>
+          <td>
+            <div
+              *ngIf="
+                edit === true;
+                then thenEditSun;
+                else elseEditSun
+              "
+            ></div>
+            <ng-template #thenEditSun>
+              <label for="statusForm">
+                <input
+                  formControlName="sunlight"
+                  type="number"
+                />
+              </label>
+            </ng-template>
+            <ng-template #elseEditSun>
+              {{ getSunlight() }}
+              <span class="unit"> </span>
+            </ng-template>
+          </td>
+        </tr>
+        <tr>
+          <td>Mood</td>
+          <td>
+            {{ plant.mood }}
+            <span class="unit"> </span>
+          </td>
+        </tr>
+      </table>
+      <div *ngIf="edit">
+        <br />
         <button type="submit">Submit</button>
-      </form>
+      </div>
+    </form>
+    <div *ngIf="!edit">
+      <br />
+      <button (click)="onEdit()">Edit</button>
     </div>
   </div>
   <div class="column">
